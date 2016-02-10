@@ -10,4 +10,4 @@ cd .dotfiles # Or wherever it is
 bash build_links.sh
 ```
 
-**Note: build_links.sh WILL delete all the existing dot files before replacing them with the current dot files**
+**Note: build_links.sh WILL delete all the existing dot files before replacing them with these dot files**
