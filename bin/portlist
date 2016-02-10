@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# List ports used and the process that is using them (including the PID)
+# if arg provided then only processes using that port will be outputted
+
+if [ $# -eq 0 ]; then
+    netstat -tulpn
+else
+    echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+    netstat -tulpn | grep ":$1 "
+fi

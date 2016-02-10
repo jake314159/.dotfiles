@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+
+"""
+
+Script that takes stdin and attempts to format it as JSON
+Will however (probably) NOT fail if poorly formatted so you
+can still get a look at what the data is
+
+Use by piping data into the script via standard out:
+    $ curl 'example.com/api/test.json' | prettyjson
+
+"""
+
+import sys
+
+out = ''
+s = ''
+
+# Load stdin into a string
+for line in sys.stdin.read():
+    s += line
+
+# Settings
+step_size = 4
+
+
+step = 0
+in_marks = False  # Are we in speech marks? What character will indicate we are leaving it?
+escape = False  # Is the next character escaped?
+for c in s:
+    if escape:
+        # This character is escaped so output it without looking at it
+        escape = False
+        out += c
+    elif c in ['\\']:
+        escape = True
+        out += c
+    elif in_marks:
+        # We are in speech marks
+        if c == in_marks or c == '\n':
+            # but we just got to the end of them
+            in_marks = False
+        out += c
+    elif c in ['"', "'"]:
+        # Enter speech marks
+        in_marks = c
+        out += c
+    elif c in ['{', '[']:
+        # Increase step and add new line
+        step += step_size
+        out += c
+        out += '\n'
+        out += ' '*step
+    elif c in ['}', ']']:
+        # Decrease step and add new line
+        step -= step_size
+        out += '\n'
+        out += ' '*step
+        out += c
+    elif c in [':']:
+        # Follow with a space
+        out += c
+        out += ' '
+    elif c in [',']:
+        # Follow with a new line
+        out += c
+        out += '\n'
+        out += ' '*step
+    elif c in [' ', '\n', '\r', '\t']:
+        #Ignore this character
+        pass
+    else:
+        # Character of no special interest, so just output it as it is
+        out += c
+
+print out
