@@ -1,0 +1,21 @@
+
+#import things
+try:
+  import json
+except Exception:
+  print 'Unable to import json'
+try:
+  import sys
+except Exception:
+  print 'Unable to import sys'
+
+# Clear screen function
+def clear():
+  print(chr(27) + "[2J")
+def clearl(n):
+  for i in range(n):
+    print("")
+print """
+
+Commonly used modules imported
+Check ~/.pythonrc for more details"""

@@ -1,0 +1,6 @@
+*.py[co]
+
+*_old*
+*_gitignore*
+ignore/*
+*/ignore/*
