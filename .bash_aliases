@@ -47,3 +47,8 @@ alias whatis='whereis'
 
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'
+
+# Scripts to help look busy...
+alias lookBusy=' while true; do head -c200 /dev/urandom | od -An -w50 -x | grep -E --color "([[:alpha:]][[:digit:]]){2}"; sleep 0.5; done'
+# Search for cafe in random data forever
+alias cafe=' cat /dev/urandom | hexdump | grep "ca fe"'
