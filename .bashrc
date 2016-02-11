@@ -89,6 +89,11 @@ if [ -f ~/.tms_bash_rc ]; then
     . ~/.tms_bash_rc
 fi
 
+# Load machine specific bashrc file for things that should only run on some machines
+if [ -f ~/.bashrc_extra ]; then
+    . ~/.bashrc_extra
+fi
+
 # Set the editor
 export VISUAL=vim
 export EDITOR=vim
