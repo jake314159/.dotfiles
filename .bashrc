@@ -86,7 +86,7 @@ fi
 
 # Load tms specific bash rc if present (Only for work machine)
 if [ -f ~/.tms_bash_rc ]; then
-    ~/.tms_bash_rc
+    . ~/.tms_bash_rc
 fi
 
 # Set the editor

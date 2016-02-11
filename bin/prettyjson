@@ -37,7 +37,7 @@ for c in s:
         out += c
     elif in_marks:
         # We are in speech marks
-        if c == in_marks or c == '\n':
+        if c == in_marks or c in ['\n']:
             # but we just got to the end of them
             in_marks = False
         out += c
