@@ -11,7 +11,69 @@ Use by piping data into the script via standard out:
 
 """
 
+help_text = """
+prettyjson
+
+Attempts to format JSON inputted on standard input without
+requiring it to be correctly formatted JSON data.
+
+Author: Jake Causon
+
+Usage:
+  $ [some_other_command] | prettyjson [args]
+  $ prettyjson [args] < [json_file]
+Examples:
+  $ curl 'example.com/api/test.json' | prettyjson --step-size 2
+  $ prettyjson < data.json
+
+
+Options:
+  -h, --help                    Display help text (and exit).
+  -s [INT], --step-size [INT]   Set the tab size used when formatting the JSON. Default 4
+  --strict                      Ensure input is correct JSON and error if not.
+                                Opposite of --relax.
+  --relax                       Attempt to format as JSON without verifying it's correctness
+                                Opposite of --strict and selected by default.
+  --multi-line-strings          Don't break out of a string when a new line is encountered
+                                relax mode only and off by default. You probably don't need this.
+
+"""
+
 import sys
+
+# Settings
+step_size = 4
+strict = False
+multi_line_strings = False
+
+# Parse command line arguments
+key = ''
+while len(sys.argv) > 0:
+    try:
+        key = sys.argv.pop(0)
+        if key in ['-h', '--help']:
+            print help_text
+            sys.exit(0)
+        elif key in ['-s', '--step-size']:
+            value = sys.argv.pop(0)
+            try:
+                step_size = int(value)
+            except:
+                pass
+        elif key in ['--strict']:
+            strict = True
+        elif key in ['--relax']:
+            strict = False
+        elif key in ['--multi-line-strings']:
+            multi_line_strings = True
+    except Exception:
+        print "Error reading command line argument '%s'" % key
+
+if strict:
+    # Run in strict mode (where the input must be perfect JSON)
+    import json
+    print json.dumps(json.loads(sys.stdin.read()), indent=step_size, separators=(',',': '))
+    sys.exit(0)  # Exit so won't run the relaxed parser
 
 out = ''
 s = ''
@@ -20,10 +82,9 @@ s = ''
 for line in sys.stdin.read():
     s += line
 
-# Settings
-step_size = 4
+print ""  # New line
 
-
+# Run the relaxed parser
 step = 0
 in_marks = False  # Are we in speech marks? What character will indicate we are leaving it?
 escape = False  # Is the next character escaped?
@@ -33,11 +94,12 @@ for c in s:
         escape = False
         out += c
     elif c in ['\\']:
+        # Escape the next character
         escape = True
         out += c
     elif in_marks:
         # We are in speech marks
-        if c == in_marks or c in ['\n']:
+        if c == in_marks or (not multi_line_strings and c in ['\n', '\r']):
             # but we just got to the end of them
             in_marks = False
         out += c
@@ -74,3 +136,4 @@ for c in s:
         out += c
 
 print out
+

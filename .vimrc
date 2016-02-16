@@ -21,4 +21,3 @@ set expandtab
 " Ooops forgot to open file as root?
 " This'll force it in (be careful it's owned by root for a reason)
 cmap w!!! %!sudo tee > /dev/null %
-
