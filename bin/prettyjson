@@ -136,4 +136,3 @@ for c in s:
         out += c
 
 print out
-

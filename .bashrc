@@ -37,7 +37,7 @@ case "$TERM" in
 esac
 
 
-# My minimal PS1
+# My minimal PS1 ('[user]@[cwd]$ ')
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@[\033[01;34m\]\w\[\033[00m\]\$ '
 else
@@ -65,10 +65,6 @@ fi
 
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

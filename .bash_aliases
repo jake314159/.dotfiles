@@ -25,11 +25,13 @@ alias gc='git checkout'
 alias gcm='git checkout master'
 alias gcmp='git checkout master && git pull'
 alias gp='git pull'
+alias fix-conflict='git mergetool -t meld'
+alias git-fix-conflict='git mergetool -t meld'
+
 alias n='node'
 alias m='mocha'
 alias npmi='npm install'
 alias p='python'
-
 alias v='vim'
 alias c='clear'
 

@@ -9,13 +9,14 @@ try:
 except Exception:
   print 'Unable to import sys'
 
-# Clear screen function
+# Clear screen functions
 def clear():
   print(chr(27) + "[2J")
 def clearl(n):
   for i in range(n):
     print("")
-print """
 
+print """
 Commonly used modules imported
-Check ~/.pythonrc for more details"""
+Check ~/.pythonrc for more details
+"""
