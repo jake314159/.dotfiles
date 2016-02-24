@@ -17,7 +17,7 @@ prettyjson
 Attempts to format JSON inputted on standard input without
 requiring it to be correctly formatted JSON data.
 
-Author: Jake Causon
+Author: Jake Causon (Github: @jake314159)
 
 Usage:
   $ [some_other_command] | prettyjson [args]

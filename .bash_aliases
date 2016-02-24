@@ -35,7 +35,6 @@ alias p='python'
 alias v='vim'
 alias c='clear'
 
-# The space bar is just too far away :'(
 alias cd.='cd ..'
 alias cd..='cd ../..'
 alias cd...='cd ../../..'
