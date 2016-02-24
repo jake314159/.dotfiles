@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+import sys
+import time
+import re
+import math
+
+help_text = """
+timer
+
+Runs a terminal based timer for the amount of time specified by the first argument
+
+Author: Jake Causon (Github: @jake314159)
+
+Allowed units in the time string:
+    Symbol      Name
+    s           Seconds
+    m           Minutes
+    h           Hour
+
+Usage:
+  $ timer [TIME_STRING]
+Examples:
+  $ timer 60
+  $ timer 1m
+  $ timer 1h20m0s
+
+
+Options:
+  -h, --help            Display help text (and exit).
+  [INT]                 Time in seconds to run the timer format
+  [STRING]              Time string representing the time to run the timer for
+
+"""
+
+help_text_short = "Run `timer --help` for more information"
+
+# Takes a time string and returns an int representing the number of seconds that string is worth
+def parse_time_string(time_string):
+    # Try assume it is an int
+    try:
+        return int(time_string)
+    except:
+        pass
+    match = re.search("^((?P<h>[0-9]+)h)?((?P<m>[0-9]+)m)?((?P<s>[0-9]+)s)?$", time_string)
+    if not match:
+        print "ERROR: Invalid time string '%s'\n%s" % (time_string, help_text_short)
+        sys.exit(2)
+    sum = 0
+    units = {
+        's': 1,
+        'm': 60,
+        'h': 60*60
+    }
+    for unit in units:
+        try:
+            sum += int(match.group(unit)) * units[unit]
+        except:
+            pass  # This unit was not provided
+    return sum
+
+# Takes an int representing the number of seconds and converts it to a human readable string
+def format_time(time_int):
+    time_string = ''
+    # hours
+    if time_int > 60*60:
+        time_string += '%dh ' % math.floor(time_int / (60*60))
+        time_int %= 60*60
+    # Minutes
+    if time_int > 60 or time_string:
+        time_string += '%02dm ' % math.floor(time_int / (60))
+        time_int %= 60
+    # Seconds
+    time_string += '%02ds ' % time_int
+    return time_string
+
+if len(sys.argv) < 2:
+    print "ERROR: No time argument specified\n%s" % help_text_short
+    sys.exit(1)
+
+arg = sys.argv[1]
+
+if arg in ['-h', '--help']:
+    print help_text
+    sys.exit(0)
+
+counter = parse_time_string(arg)
+
+while counter > 0:
+    sys.stdout.write('  => %s' % format_time(counter))
+    sys.stdout.write(' ' * 36)
+    sys.stdout.write('\r')  # Clear line
+    sys.stdout.flush()
+    try:
+        time.sleep(1)
+    except KeyboardInterrupt:
+        print ""
+        sys.exit(1)
+    counter -= 1
+
+print "TIMER HAS ENDED"
