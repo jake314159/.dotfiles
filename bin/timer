@@ -78,24 +78,27 @@ if len(sys.argv) < 2:
     print "ERROR: No time argument specified\n%s" % help_text_short
     sys.exit(1)
 
+
+
 arg = sys.argv[1]
 
 if arg in ['-h', '--help']:
     print help_text
     sys.exit(0)
 
-counter = parse_time_string(arg)
-
-while counter > 0:
-    sys.stdout.write('  => %s' % format_time(counter))
+run_time = parse_time_string(arg)
+counter = 1
+start_time = time.time()
+while counter <= run_time:
+    sys.stdout.write('  => %s' % format_time(run_time-counter+1))
     sys.stdout.write(' ' * 36)
     sys.stdout.write('\r')  # Clear line
     sys.stdout.flush()
     try:
-        time.sleep(1)
+        time.sleep(start_time + counter - time.time())
     except KeyboardInterrupt:
         print ""
         sys.exit(1)
-    counter -= 1
+    counter += 1
 
 print "TIMER HAS ENDED"
