@@ -37,8 +37,8 @@ help_text_short = "Run `timer --help` for more information"
 
 # Takes a time string and returns an int representing the number of seconds that string is worth
 def parse_time_string(time_string):
-    # Try assume it is an int
     try:
+        # Try parsing as an int
         return int(time_string)
     except:
         pass
@@ -94,8 +94,10 @@ while counter <= run_time:
     sys.stdout.write(' ' * 36)
     sys.stdout.write('\r')  # Clear line
     sys.stdout.flush()
+    wait_time = start_time + counter - time.time()
     try:
-        time.sleep(start_time + counter - time.time())
+        if wait_time > 0:
+            time.sleep(wait_time)
     except KeyboardInterrupt:
         print ""
         sys.exit(1)
