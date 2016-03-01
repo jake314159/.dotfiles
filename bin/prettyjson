@@ -40,6 +40,7 @@ Options:
 """
 
 import sys
+import re
 
 # Settings
 step_size = 4
@@ -82,6 +83,11 @@ s = ''
 for line in sys.stdin.read():
     s += line
 
+# \x1D (group seperator) is used as a special character for the parser
+# \0x1D has the same effect as a quote ('") but will not be ouputted for special formatting improvements 
+s = re.sub(r'datetime\(([^)]*)\)', r'datetime(\x1D\g<1>\x1D)', s)
+s = s.replace('\\x1D', chr(29))
+
 print ""  # New line
 
 # Run the relaxed parser
@@ -102,11 +108,13 @@ for c in s:
         if c == in_marks or (not multi_line_strings and c in ['\n', '\r']):
             # but we just got to the end of them
             in_marks = False
-        out += c
-    elif c in ['"', "'"]:
+        if c not in ["\x1D"]:
+            out += c
+    elif c in ['"', "'", "\x1D"]:
         # Enter speech marks
         in_marks = c
-        out += c
+        if c not in ["\x1D"]:
+            out += c
     elif c in ['{', '[']:
         # Increase step and add new line
         step += step_size
