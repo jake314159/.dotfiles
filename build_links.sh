@@ -1,5 +1,5 @@
 
-DIR=`dirname "$(readlink -f "$0")"`
+DIR=`pwd`
 
 rm ~/.bash_aliases
 rm ~/.bashrc
