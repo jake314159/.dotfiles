@@ -14,17 +14,23 @@ fi
 
 cd "./remote"
 
-# prettyjson
-if [ -d "./prettyjson" ]; then
-    echo "BUILD: Updating prettyjson"
-    cd "./prettyjson"
-    git pull
-    cd "$DIR/remote"
-else
-    echo "BUILD: Cloning prettyjson"
-    git clone git@github.com:jake314159/prettyjson.git
-    rm ~/bin/prettyjson
-    ln -s "$DIR/remote/prettyjson/src/prettyjson" ~/bin/prettyjson
-fi
+function load_repo {
+    # ARG1 Repo name: The directory name git clone will create (eg. prettyjson)
+    # ARG2 link path: The path in the repo for the script (eg. "src/prettyjson")
+    # ARG3 Repo url: URL to the repo (eg. "git@github.com:jake314159/prettyjson.git")
+    if [ -d "./$1" ]; then
+        echo "BUILD: Updating $1"
+        cd "./$1"
+        git pull
+        cd "$DIR/remote"
+    else
+        echo "BUILD: Cloning $1"
+        git clone $3
+        rm ~/bin/$1
+        ln -s "$DIR/remote/$1/$2" ~/bin/$1
+    fi
+}
+
+load_repo "prettyjson" "src/prettyjson" "git@github.com:jake314159/prettyjson.git"
 
 cd "$DIR"
