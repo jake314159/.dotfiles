@@ -8,6 +8,7 @@ Add to system like so:
 git clone THE_URL
 cd .dotfiles  # Or wherever it is
 bash build_links.sh
+bash external_build_links.sh
 ```
 
 **Note: build_links.sh WILL delete all the existing dot files before replacing them with a soft link to these dot files**
