@@ -31,6 +31,7 @@ alias fix-conflict='git mergetool -t meld'
 alias git-fix-conflict='git mergetool -t meld'
 alias glc='git diff HEAD~1 HEAD'  # Git diff for the last commit
 alias gdlc='git diff HEAD~1 HEAD'
+alias gcb='git branch | grep "^\*"'
 
 alias n='node'
 alias m='mocha'
