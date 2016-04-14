@@ -54,6 +54,8 @@ alias whatis='whereis'
 # `web` loads the bookmark page of a terminal web browser
 alias web='w3m -B'
 
+alias weather="wget -O - http://wttr.in/southampton -q"
+
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'
 
