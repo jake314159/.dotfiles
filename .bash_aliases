@@ -32,6 +32,10 @@ alias git-fix-conflict='git mergetool -t meld'
 alias glc='git diff HEAD~1 HEAD'  # Git diff for the last commit
 alias gdlc='git diff HEAD~1 HEAD'
 alias gcb='git branch | grep "^\*"'
+# List any todo notes in the git diff
+alias gtodo='git diff | grep "^\+" | grep "TODO"'
+alias gurl='git remote show origin | grep "URL"'
+alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
 alias n='node'
 alias m='mocha'
@@ -54,7 +58,8 @@ alias whatis='whereis'
 # `web` loads the bookmark page of a terminal web browser
 alias web='w3m -B'
 
-alias weather="wget -O - http://wttr.in/southampton -q"
+alias weather="curl http://wttr.in/southampton"
+alias moon="curl http://wttr.in/Moon"
 
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'
