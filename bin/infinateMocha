@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# List of buzz-words used to create the test names
+WORDS=(one two six node javascript js collection mongo exists helper deploy rule linux unix windows osx mac Apple DROP
+        equal not client script track tracker email message remote optimization when esp POST GET api uri gui length
+        regex tree map dict int float object number dev unit node python jinja html css style xml json markup system
+        eval get update is mutate true false undefined defined error warning info id options person verify match now
+        language string date time start end done readme port ip address encrypted encryption external git github url
+        control file key password username account action ssl certificate upload download ftp ssh shell agile source
+        content if while else list create destroy thread handle template code rate limit load function unicode internal
+        error 404 200 hardware software buffer overflow less more greater xml soap hash blowfish aes des rsa sha1 md5
+        sha256 bit bits closure method class debug task interface bash php message parse stringify add sum multiply
+        divide route context count random statistics signal callback website interrupt sleep timeout wait sql SELECT
+        delete remove max min median average asynchronous synchronous keyboard mouse drive HDD SSD RAM memory service
+        index random exception action https http DateTime temp temporary "/tmp" "/etc" dir directory age waterfall
+        integration unknown known value bandwith tunnel raw jpeg pass fail exe pixel C++ help emoji data driver disk
+        input output google "Stack Overflow" Slack golang bing ping ls cat5 ethernet "U+1F4A9" RC4 SMTP huristic USB
+        algorithm android throw null query result dot dash day month year response reply format preview
+        )
+
+# Counter for the number of 'tests' that have been run
+TESTS=0
+
+# trap keyboard interrupt (control-c) & output something to make it look like we are at the end of the tests
+control_c()
+{
+  echo -en "\n\n\e[32m    $TESTS passing \e[90m(47s)\e[39m\n\n";
+  exit $?
+}
+trap control_c SIGINT
+
+echo -e "\n\n  Unit tests"
+
+while /bin/true; do
+    # Counter for how many tests we have run
+    TESTS=$(($TESTS + 1))
+
+    # Bash doesn't support floats... so... yea this hack is the result
+    DELAY_lower=`expr $RANDOM % 99`
+    DELAY_higher=`expr $RANDOM % 2`
+    DELAY="0.$DELAY_higher$DELAY_lower"
+
+    # How many words to include in the test name
+    COUNT=`expr $RANDOM % 8`
+    BIAS=`expr $RANDOM % 2`  # Bias away from 1 and 9
+    COUNT=$(($COUNT + $BIAS))
+
+    # Generate the test name
+    TEXT=""
+    while [ $COUNT -ge 0 ]
+    do
+        COUNT=$(($COUNT - 1))
+        TEXT="$TEXT ${WORDS[$RANDOM % ${#WORDS[*]}]}";
+    done
+
+    echo -e "\e[32m    ✓ \e[90mshould execute a$TEXT test\e[39m";
+    sleep $DELAY
+done
