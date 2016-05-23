@@ -6,6 +6,9 @@ ignore/*
 */ignore/*
 
 *~
+.DS_Store
+.DS_Store?
+*.swp
 
 # Ignore any private keys
 *.gpg
