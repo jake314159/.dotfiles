@@ -6,3 +6,17 @@ ignore/*
 */ignore/*
 
 *~
+
+# Ignore any private keys
+*.gpg
+*.pkcs12
+*.pfx
+*.p12
+*.key
+*.pem
+*.csr
+*.cert
+*.cer
+*.crt
+*id_rsa
+
