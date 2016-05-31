@@ -102,3 +102,12 @@ export XMODIFIERS=
 export PATH=$PATH:~/bin
 
 export PYTHONSTARTUP="$HOME/.pythonrc"
+
+# Add a shortcut so c == clear or cd depending on if it has arguments
+function c() {
+    if [ $# -eq 0 ]; then
+        clear
+    else
+        cd $*
+    fi
+}

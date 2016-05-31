@@ -42,7 +42,6 @@ alias m='mocha'
 alias npmi='npm install'
 alias p='python'
 alias v='vim'
-alias c='clear'
 
 alias cd.='cd ..'
 alias cd..='cd ../..'
