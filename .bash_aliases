@@ -48,6 +48,11 @@ alias cd..='cd ../..'
 alias cd...='cd ../../..'
 alias cd....='cd ../../../..'
 alias cd.....='cd ../../../../..'
+alias c.='cd ..'
+alias c..='cd ../..'
+alias c...='cd ../../..'
+alias c....='cd ../../../..'
+alias c.....='cd ../../../../..'
 
 # I always forget what this is called so alias it for some things I often try
 alias where='whereis'

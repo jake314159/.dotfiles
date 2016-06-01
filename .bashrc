@@ -38,6 +38,7 @@ esac
 
 
 # My minimal PS1 ('[user]@[cwd]$ ')
+PROMPT_DIRTRIM=2 # Max 2 dirs in cwd path of PS1
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@[\033[01;34m\]\w\[\033[00m\]\$ '
 else
@@ -80,7 +81,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Load tms specific bash rc if present (Only for work machine)
+# Load tms specific bash rc if present
 if [ -f ~/.tms_bash_rc ]; then
     . ~/.tms_bash_rc
 fi
@@ -111,3 +112,4 @@ function c() {
         cd $*
     fi
 }
+
