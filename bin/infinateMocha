@@ -21,6 +21,9 @@ WORDS=(one two six node javascript js collection mongo exists helper deploy rule
 # Counter for the number of 'tests' that have been run
 TESTS=0
 
+# Seed random
+RANDOM=`date +%s`;
+
 # trap keyboard interrupt (control-c) & output something to make it look like we are at the end of the tests
 control_c()
 {
@@ -53,6 +56,6 @@ while /bin/true; do
         TEXT="$TEXT ${WORDS[$RANDOM % ${#WORDS[*]}]}";
     done
 
-    echo -e "\e[32m    ✓ \e[90mshould execute a$TEXT test\e[39m";
+    echo -e "\e[32m    ✓ \e[90m$TEXT test\e[39m";
     sleep $DELAY
 done

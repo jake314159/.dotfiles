@@ -22,5 +22,8 @@ ignore/*
 *.cer
 *.crt
 *id_rsa
+*/gpg_keys/*
 
 *.idea/*
+
+
