@@ -34,7 +34,7 @@ alias glc='git diff HEAD~1 HEAD'  # Git diff for the last commit
 alias gdlc='git diff HEAD~1 HEAD'
 alias gcb='git branch | grep "^\*"'
 # List any todo notes in the git diff
-alias gtodo='git diff | grep "^\+" | grep "TODO"'
+alias gtodo='git diff | grep "^\+" | sed "s|^\+\s*|\+ |g" | grep "TODO" && git diff --staged | grep "^\+" | grep "TODO" || git diff --staged | grep "^\+" | sed "s|^\+\s*|\+ |g" | grep "TODO"'
 alias gurl='git remote show origin | grep "URL"'
 alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 

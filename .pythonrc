@@ -17,10 +17,10 @@ def clearl(n):
     print("")
 
 # Set console.log to print for when I forget i'm not using JavaScript
-class c83y38294789234723894:
-  def log(self, x):
+class console:
+  @staticmethod
+  def log(x):
     print x
-console = c83y38294789234723894()
 
 print """
 Commonly used modules imported
