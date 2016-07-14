@@ -45,6 +45,9 @@ alias npmi='npm install'
 alias p='python'
 alias v='vim'
 
+# SSH on the non-standard port I normally use
+alias sshh='ssh -p 3141'
+
 # cd down directories at super speed ^_^
 alias cd.='cd ..'
 alias cd..='cd ../..'
