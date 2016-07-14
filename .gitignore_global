@@ -10,6 +10,8 @@ ignore/*
 .DS_Store?
 *.swp
 
+.pypirc
+
 # Ignore any private keys
 *.gpg
 *.pkcs12
