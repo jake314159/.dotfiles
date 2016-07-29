@@ -16,3 +16,4 @@ ln -s "$DIR/.pythonrc" ~/.pythonrc
 ln -s "$DIR/.gitignore_global" ~/.gitignore_global
 ln -s "$DIR/.vimrc" ~/.vimrc
 rsync -r "$DIR/bin" ~
+

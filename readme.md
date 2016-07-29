@@ -22,3 +22,21 @@ To have git use the gitignore_global file it may be required to add the followin
         excludesfile = /home/jakec/.gitignore_global
 ```
 
+also here is a selection of git aliases that are handy
+```
+[alias]
+        co = checkout
+        ci = commit
+        st = status
+        br = branch
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+        type = cat-file -t
+        dump = cat-file -p
+        a = add
+        p = pull
+        stat = diff --stat
+        stats = diff --stat --staged
+        url = remote show origin
+        dbr = branch -d
+```
+

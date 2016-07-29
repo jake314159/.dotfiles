@@ -14,7 +14,7 @@ alias reff='source ~/.bashrc'
 
 # Some very short shortcuts
 alias g='git'
-alias gb='git branch'
+alias gb='echo "" && git branch'
 alias gst='git status' # gs is ghostscript
 alias ga='git add'
 alias gap='git add -p'
