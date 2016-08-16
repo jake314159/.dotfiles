@@ -120,3 +120,6 @@ function glm() {
     git checkout $current_branch
 }
 alias gglm='glm'
+alias gcm='glm'
+alias ggcm='glm'
+
