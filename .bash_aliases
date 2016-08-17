@@ -43,7 +43,9 @@ alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 # Adds the argument file to the last commit and force push it
 # For when you commit something then remeber something you forgot
 # NEVER FORCE PUSH a shared branch... ever... careful with this one
-function goops { git add -A "$@" && git commit --amend --no-edit && git push --force --force-with-lease }
+function goops() {
+    git add -A "$@" && git commit --amend --no-edit && git push --force --force-with-lease
+}
 
 alias n='node'
 alias m='mocha'
@@ -94,4 +96,3 @@ alias findfile='find . -type f -regex'
 alias lookBusy=' while true; do head -c200 /dev/urandom | od -An -w50 -x | grep -E --color "([[:alpha:]][[:digit:]]){2}"; sleep 0.5; done'
 # Search for cafe in random data forever
 alias cafe=' cat /dev/urandom | hexdump | grep -E "ca ?fe"'
-
