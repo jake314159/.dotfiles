@@ -3,11 +3,11 @@
 try:
   import json
 except Exception:
-  print 'Unable to import json'
+  print('Unable to import json')
 try:
   import sys
 except Exception:
-  print 'Unable to import sys'
+  print('Unable to import sys')
 
 # Clear screen functions
 def clear():
@@ -20,9 +20,10 @@ def clearl(n):
 class console:
   @staticmethod
   def log(x):
-    print x
+    print(x)
 
-print """
+print("""
 Commonly used modules imported
 Check ~/.pythonrc for more details
-"""
+""")
+

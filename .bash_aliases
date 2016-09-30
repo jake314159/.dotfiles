@@ -51,6 +51,8 @@ alias n='node'
 alias m='mocha'
 alias npmi='npm install'
 alias p='python'
+alias p2='python2'
+alias p3='python3'
 alias v='vim'
 
 # SSH on the non-standard port I normally use
