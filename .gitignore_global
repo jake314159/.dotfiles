@@ -1,9 +1,11 @@
 *.py[co]
 
 *_old*
+*.old
 *_gitignore*
 ignore/*
 */ignore/*
+*_ignore.*
 
 *~
 .DS_Store
