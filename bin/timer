@@ -24,10 +24,12 @@ Examples:
   $ timer 60
   $ timer 1m
   $ timer 1h20m0s
-
+  $ timer 1 hour 20 minutes
+  $ timer --overrun 4min
 
 Options:
   -h, --help            Display help text (and exit).
+  -o, --overrun         Don't stop the timer when it reaches 0, stop manually with ctrl+c
   [INT]                 Time in seconds to run the timer format
   [STRING]              Time string representing the time to run the timer for
 
@@ -38,11 +40,13 @@ help_text_short = "Run `timer --help` for more information"
 # Takes a time string and returns an int representing the number of seconds that string is worth
 def parse_time_string(time_string):
     try:
-        # Try parsing as an int
+        # Try parsing as an int number of seconds first
         return int(time_string)
     except:
         pass
-    match = re.search("^((?P<h>[0-9]+)h)?((?P<m>[0-9]+)m)?((?P<s>[0-9]+)s)?$", time_string)
+
+    # "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' Now they have two problems." - Jamie Zawinski
+    match = re.search("^ *((?P<d>[0-9]+) *d(ays?)?)? *((?P<h>[0-9]+) *h(ours?)?)? *((?P<m>[0-9]+) *m(in(ute)?s?)?)? *((?P<s>[0-9]+) *s(ec(ond)?s?)?)? *$", time_string)
     if not match:
         print "ERROR: Invalid time string '%s'\n%s" % (time_string, help_text_short)
         sys.exit(2)
@@ -50,7 +54,8 @@ def parse_time_string(time_string):
     units = {
         's': 1,
         'm': 60,
-        'h': 60*60
+        'h': 60*60,
+        'd': 60*60*24
     }
     for unit in units:
         try:
@@ -62,34 +67,51 @@ def parse_time_string(time_string):
 # Takes an int representing the number of seconds and converts it to a human readable string
 def format_time(time_int):
     time_string = ''
+
+    if time_int < 0:
+        time_int = -time_int
+        time_string += '-'
+
     # hours
     if time_int > 60*60:
         time_string += '%dh ' % math.floor(time_int / (60*60))
         time_int %= 60*60
     # Minutes
-    if time_int > 60 or time_string:
+    if time_int > 60 or len(time_string) > 1:
         time_string += '%02dm ' % math.floor(time_int / (60))
         time_int %= 60
     # Seconds
     time_string += '%02ds ' % time_int
     return time_string
 
-if len(sys.argv) < 2:
+# Parse the cmd arguments
+time_string = ''
+overrun = False
+
+sys.argv.pop(0)
+while len(sys.argv) > 0:
+    arg = sys.argv.pop(0)
+
+    if arg in ['-h', '--help']:
+        print help_text
+        sys.exit(0)
+    elif arg in ['-o', '--overrun']:
+        overrun = True
+    elif arg[0] == '-':
+        print "Unkown paramiter %s" % arg
+    else:
+        # Anything not starting with '-' is part of the time string (probably)
+        time_string += ' %s' % arg.lower()
+
+if not time_string:
     print "ERROR: No time argument specified\n%s" % help_text_short
     sys.exit(1)
 
-
-
-arg = sys.argv[1]
-
-if arg in ['-h', '--help']:
-    print help_text
-    sys.exit(0)
-
-run_time = parse_time_string(arg)
+# Run the timer
+run_time = parse_time_string(time_string)
 counter = 1
 start_time = time.time()
-while counter <= run_time:
+while counter <= run_time or overrun:
     sys.stdout.write('  => %s' % format_time(run_time-counter+1))
     sys.stdout.write(' ' * 36)
     sys.stdout.write('\r')  # Clear line

@@ -55,6 +55,8 @@ alias p2='python2'
 alias p3='python3'
 alias v='vim'
 
+alias watchpm2='watch -n 30 pm2 list'
+
 # SSH on the non-standard port I normally use
 alias sshh='ssh -p 3141'
 
