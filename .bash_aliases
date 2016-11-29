@@ -40,12 +40,9 @@ alias gtodo='git diff | grep "^\+" | sed "s|^\+\s*|\+ |g" | grep "TODO" && git d
 alias gurl='git remote show origin | grep "URL"'
 alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
-# Adds the argument file to the last commit and force push it
-# For when you commit something then remeber something you forgot
-# NEVER FORCE PUSH a shared branch... ever... careful with this one
-function goops() {
-    git add -A "$@" && git commit --amend --no-edit && git push --force --force-with-lease
-}
+# Set upstream, depends on the below git alias being in .gitconfig
+# sup = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+alias gsup='git sup'
 
 alias n='node'
 alias m='mocha'

@@ -6,6 +6,7 @@
 ignore/*
 */ignore/*
 *_ignore.*
+*.ignore
 
 *~
 .DS_Store
@@ -30,4 +31,4 @@ ignore/*
 
 *.idea/*
 
-
+process.json

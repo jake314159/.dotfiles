@@ -122,3 +122,4 @@ function glm() {
 alias gglm='glm'
 alias gcm='glm'
 alias ggcm='glm'
+
