@@ -113,13 +113,4 @@ function c() {
     fi
 }
 
-# Pull the latest master without leaving this branch ("Get latest master")
-function glm() {
-    current_branch=`gcb | grep -o '[^ ]*$'`
-    gcmp
-    git checkout $current_branch
-}
-alias gglm='glm'
-alias gcm='glm'
-alias ggcm='glm'
 

@@ -31,6 +31,8 @@ alias gcm='git checkout master'
 alias gcmp='git checkout master && git pull'
 alias gp='git pull'
 alias fix-conflict='git mergetool -t meld'
+alias glm='git fetch origin master:master' # Get latest master
+alias gglm='git fetch origin master:master'
 alias git-fix-conflict='git mergetool -t meld'
 alias glc='git diff HEAD~1 HEAD'  # Git diff for the last commit
 alias gdlc='git diff HEAD~1 HEAD'
@@ -53,6 +55,8 @@ alias p3='python3'
 alias v='vim'
 
 alias watchpm2='watch -n 30 pm2 list'
+alias log='pm2 log all'
+alias logs='pm2 log all'
 
 # SSH on the non-standard port I normally use
 alias sshh='ssh -p 3141'
@@ -73,6 +77,9 @@ alias c.....='cd ../../../../..'
 alias cdgg='cd ~/git'
 alias cd~='cd ~'
 alias cdhh='cd ~'
+
+# The opposite of yes
+alias no='yes n'
 
 # Hash things
 alias md5='md5sum'
