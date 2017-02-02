@@ -17,8 +17,9 @@ alias reff='source ~/.bashrc'
 alias g='git'
 alias gb='echo "" && git branch'
 alias gst='git status' # gs is ghostscript
-alias ga='git add'
 alias gap='git add -p'
+alias ga='git add'
+alias gita='git add'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gdw='git diff --word-diff'
@@ -73,6 +74,10 @@ alias c...='cd ../../..'
 alias c....='cd ../../../..'
 alias c.....='cd ../../../../..'
 
+# prettyjson shortcut
+# Note this is for prettyjson2 which is in development & yet to be released
+alias pj="prettyjson2"
+
 # cd jumps
 alias cdgg='cd ~/git'
 alias cd~='cd ~'
@@ -96,6 +101,9 @@ alias web='w3m -B'
 
 alias weather="curl http://wttr.in/southampton"
 alias moon="curl http://wttr.in/Moon"
+
+# Timer for 3 min tea brew
+alias tea="timer -o 3m"
 
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'
