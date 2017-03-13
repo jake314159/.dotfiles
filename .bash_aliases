@@ -1,5 +1,4 @@
 
-
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -74,6 +73,10 @@ alias c...='cd ../../..'
 alias c....='cd ../../../..'
 alias c.....='cd ../../../../..'
 
+# Encode/Decode url strings
+alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+alias urle='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+
 # prettyjson shortcut
 # Note this is for prettyjson2 which is in development & yet to be released
 alias pj="prettyjson2"
@@ -102,8 +105,8 @@ alias web='w3m -B'
 alias weather="curl http://wttr.in/southampton"
 alias moon="curl http://wttr.in/Moon"
 
-# Timer for 3 min tea brew
-alias tea="timer -o 3m"
+# Timer for 3 min 30 sec tea brew
+alias tea="timer -o 3m30s"
 
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'

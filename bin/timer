@@ -16,7 +16,7 @@ Allowed units in the time string:
     Symbol      Name
     s           Seconds
     m           Minutes
-    h           Hour
+    h           Hours
 
 Usage:
   $ timer [TIME_STRING]
@@ -72,7 +72,7 @@ def format_time(time_int):
         time_int = -time_int
         time_string += '-'
 
-    # hours
+    # Hours
     if time_int > 60*60:
         time_string += '%dh ' % math.floor(time_int / (60*60))
         time_int %= 60*60
@@ -111,18 +111,19 @@ if not time_string:
 run_time = parse_time_string(time_string)
 counter = 1
 start_time = time.time()
-while counter <= run_time or overrun:
-    sys.stdout.write('  => %s' % format_time(run_time-counter+1))
-    sys.stdout.write(' ' * 36)
-    sys.stdout.write('\r')  # Clear line
-    sys.stdout.flush()
-    wait_time = start_time + counter - time.time()
-    try:
+try:
+    while counter <= run_time or overrun:
+        sys.stdout.write('  => %s' % format_time(run_time-counter+1))
+        sys.stdout.write(' ' * 36)
+        sys.stdout.write('\r')  # Clear line
+        sys.stdout.flush()
+        wait_time = start_time + counter - time.time()
         if wait_time > 0:
             time.sleep(wait_time)
-    except KeyboardInterrupt:
-        print ""
-        sys.exit(1)
-    counter += 1
+        counter += 1
+except KeyboardInterrupt:
+    print ""
+    sys.exit(1)
+
 
 print "TIMER HAS ENDED"
