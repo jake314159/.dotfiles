@@ -74,8 +74,13 @@ alias c....='cd ../../../..'
 alias c.....='cd ../../../../..'
 
 # Encode/Decode url strings
-alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
-alias urle='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+# Shorthand for the script urldecode (found in ~/bin)
+alias urld='urldecode --decode '
+alias urle='urldecode --encode '
+# This is an old version that doesn't require the script to be present
+# alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+# alias urle='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+
 
 # prettyjson shortcut
 # Note this is for prettyjson2 which is in development & yet to be released
@@ -115,3 +120,4 @@ alias findfile='find . -type f -regex'
 alias lookBusy=' while true; do head -c200 /dev/urandom | od -An -w50 -x | grep -E --color "([[:alpha:]][[:digit:]]){2}"; sleep 0.5; done'
 # Search for cafe in random data forever
 alias cafe=' cat /dev/urandom | hexdump | grep -E "ca ?fe"'
+
