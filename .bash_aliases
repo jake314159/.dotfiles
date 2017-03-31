@@ -90,6 +90,7 @@ alias pj="prettyjson2"
 # cd jumps
 alias cdgg='cd ~/git'
 alias cd~='cd ~'
+alias c~='cd ~'
 alias cdhh='cd ~'
 
 # The opposite of yes
@@ -112,7 +113,7 @@ alias weather="curl http://wttr.in/southampton"
 alias moon="curl http://wttr.in/Moon"
 
 # Timer for 3 min 30 sec tea brew
-alias tea="timer -o 3m30s"
+alias tea="timer -o --notify 'Your tea is ready' 3m30s"
 
 # Recursively searches for a file who's name matches the supplied regex
 alias findfile='find . -type f -regex'

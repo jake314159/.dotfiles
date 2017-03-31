@@ -4,6 +4,7 @@ import sys
 import time
 import re
 import math
+import subprocess
 
 help_text = """
 timer
@@ -30,6 +31,7 @@ Examples:
 Options:
   -h, --help            Display help text (and exit).
   -o, --overrun         Don't stop the timer when it reaches 0, stop manually with ctrl+c
+  --notify "msg"        Sends a notification bubble when the timer ends, requires 'notify-send' package
   [INT]                 Time in seconds to run the timer format
   [STRING]              Time string representing the time to run the timer for
 
@@ -84,8 +86,13 @@ def format_time(time_int):
     time_string += '%02ds ' % time_int
     return time_string
 
+def send_notification(msg, title="Timer has ended"):
+    # Could alternatively use pynotify package instead
+    subprocess.Popen(['notify-send', "-i", "time", title, msg])
+
 # Parse the cmd arguments
 time_string = ''
+notify_message = None
 overrun = False
 
 sys.argv.pop(0)
@@ -97,6 +104,8 @@ while len(sys.argv) > 0:
         sys.exit(0)
     elif arg in ['-o', '--overrun']:
         overrun = True
+    elif arg in ['--notify']:
+        notify_message = sys.argv.pop(0)
     elif arg[0] == '-':
         print "Unkown paramiter %s" % arg
     else:
@@ -120,10 +129,12 @@ try:
         wait_time = start_time + counter - time.time()
         if wait_time > 0:
             time.sleep(wait_time)
+        if counter == run_time and notify_message:
+            send_notification(notify_message)
         counter += 1
+
 except KeyboardInterrupt:
     print ""
     sys.exit(1)
-
 
 print "TIMER HAS ENDED"
