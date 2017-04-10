@@ -5,7 +5,7 @@ Mostly kept here (and public) to make it easy to add to a new machine
 
 Add to system like so:
 ```bash
-git clone THE_URL
+git clone git@github.com:jake314159/.dotfiles.git
 cd .dotfiles  # Or wherever it is
 bash build_links.sh
 bash external_build_links.sh
@@ -38,5 +38,5 @@ also here is a selection of git aliases that are handy
         stats = diff --stat --staged
         url = remote show origin
         dbr = branch -d
+        sup = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD
 ```
-

@@ -61,7 +61,7 @@ alias logs='pm2 log all'
 # SSH on the non-standard port I normally use
 alias sshh='ssh -p 3141'
 
-# cd down directories at super speed ^_^
+# cd up directories at super speed ^_^
 alias cd.='cd ..'
 alias cd..='cd ../..'
 alias cd...='cd ../../..'
@@ -106,13 +106,18 @@ alias where='whereis'
 alias what='whereis'
 alias whatis='whereis'
 
+# Check where the provided url redirects too without loading it in a browser
+function redirect() {
+    curl -s --head $* | grep '^Location:'
+}
+
 # `web` loads the bookmark page of a terminal web browser
 alias web='w3m -B'
 
 alias weather="curl http://wttr.in/southampton"
 alias moon="curl http://wttr.in/Moon"
 
-# Timer for 3 min 30 sec tea brew
+# Timer for brewing a perfect cup of tea
 alias tea="timer -o --notify 'Your tea is ready' 3m30s"
 
 # Recursively searches for a file who's name matches the supplied regex
