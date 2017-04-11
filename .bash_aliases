@@ -1,5 +1,5 @@
 
-# some more ls aliases
+# Some ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -52,11 +52,19 @@ alias npmi='npm install'
 alias p='python'
 alias p2='python2'
 alias p3='python3'
-alias v='vim'
+
+# Alias `v` to `vim` or `vi` depending on what's installed on this system
+if hash vim 2>/dev/null; then
+    alias v='vim'
+else
+    alias v='vi'
+    echo "Vim not installed!"
+fi
 
 alias watchpm2='watch -n 30 pm2 list'
 alias log='pm2 log all'
 alias logs='pm2 log all'
+alias pm2l='pm2 list'
 
 # SSH on the non-standard port I normally use
 alias sshh='ssh -p 3141'
@@ -73,25 +81,40 @@ alias c...='cd ../../..'
 alias c....='cd ../../../..'
 alias c.....='cd ../../../../..'
 
-# Encode/Decode url strings
-# Shorthand for the script urldecode (found in ~/bin)
-alias urld='urldecode --decode '
-alias urle='urldecode --encode '
-alias urldd='urldecode --double-decode '
-alias urlee='urldecode --double-encode '
-# This is an old version that doesn't require the script to be present
-# alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
-# alias urle='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
-
-# prettyjson shortcut
-# Note this is for prettyjson2 which is in development & yet to be released
-alias pj="prettyjson2"
-
 # cd jumps
 alias cdgg='cd ~/git'
 alias cd~='cd ~'
 alias c~='cd ~'
 alias cdhh='cd ~'
+
+# Add a function so c is either clear or cd depending on whether it has arguments
+function c() {
+    if [ $# -eq 0 ]; then
+        clear
+    else
+        cd $*
+    fi
+}
+
+# Encode/Decode url strings
+if hash urldecode 2>/dev/null; then
+    # Shorthand for the script urldecode (found in bin)
+    alias urld='urldecode --decode '
+    alias urle='urldecode --encode '
+    alias urldd='urldecode --double-decode '
+    alias urlee='urldecode --double-encode '
+else
+    # This is a version that doesn't require the urldecode script to be present
+    alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+    alias urle='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+    alias urldd='python -c "import sys, urllib as ul; print ul.unquote_plus(ul.unquote_plus(sys.argv[1]))"'
+    alias urlee='python -c "import sys, urllib as ul; print ul.quote_plus(ul.quote_plus(sys.argv[1]))"'
+    echo "urldecode not installed!"
+fi
+
+# prettyjson shortcut
+# Note this is for prettyjson2 which is in development & yet to be released
+alias pj="prettyjson2"
 
 # The opposite of yes
 alias no='yes n'
