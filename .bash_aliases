@@ -1,4 +1,10 @@
 
+# Allow aliases to be run with sudo
+# From the bash docs:
+#     If the last character of the alias value is a space or tab character, then the next
+#     command word following the alias is also checked for alias expansion
+alias sudo='sudo '
+
 # Some ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -99,10 +105,10 @@ function c() {
 # Encode/Decode url strings
 if hash urldecode 2>/dev/null; then
     # Shorthand for the script urldecode (found in bin)
-    alias urld='urldecode --decode '
-    alias urle='urldecode --encode '
-    alias urldd='urldecode --double-decode '
-    alias urlee='urldecode --double-encode '
+    alias urld='urldecode --decode'
+    alias urle='urldecode --encode'
+    alias urldd='urldecode --double-decode'
+    alias urlee='urldecode --double-encode'
 else
     # This is a version that doesn't require the urldecode script to be present
     alias urld='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
