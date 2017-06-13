@@ -26,10 +26,11 @@ SOFTWARE.
 help="
 $info
 Handy when a test sometimes (but not always) fails and you want to run it
-multiple times until it does eventually fail.
+multiple times until it does eventually fail. Stop the script from running
+early with Ctrl+C.
 
 Example Usage:
-  $ run2fail mocha -f "dodgy test"
+  $ run2fail mocha -f \"dodgy test\"
 "
 
 # If a command fails then exit
