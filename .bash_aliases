@@ -68,9 +68,17 @@ else
 fi
 
 alias watchpm2='watch -n 30 pm2 list'
-alias log='pm2 log all'
 alias logs='pm2 log all'
 alias pm2l='pm2 list'
+
+# Watch pm2 logs
+function log() {
+    if [ $# -eq 0 ]; then
+        pm2 log all
+    else
+        pm2 log $*
+    fi
+}
 
 # SSH on the non-standard port I normally use
 alias sshh='ssh -p 3141'
@@ -155,3 +163,7 @@ alias findfile='find . -type f -regex'
 # Scripts to help look busy...
 alias lookBusy=' while true; do head -c200 /dev/urandom | od -An -w50 -x | grep -E --color "([[:alpha:]][[:digit:]]){2}"; sleep 0.5; done'
 alias cafe=' cat /dev/urandom | hexdump | grep -E "ca ?fe"'
+
+# eg. fake-latency 97ms
+alias fake-latency='tc qdisc add dev eth0 root netem delay '
+alias remove-latency='tc qdisc del dev eth0 root netem'
