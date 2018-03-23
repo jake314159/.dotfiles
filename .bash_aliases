@@ -52,8 +52,8 @@ alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 # sup = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 alias gsup='git sup'
 
-alias n='node'
-alias m='mocha'
+alias n='node --trace-warnings'
+alias m='mocha --exit'
 alias npmi='npm install'
 alias p='python'
 alias p2='python2'
@@ -62,8 +62,10 @@ alias p3='python3'
 # Alias `v` to `vim` or `vi` depending on what's installed on this system
 if hash vim 2>/dev/null; then
     alias v='vim'
+    alias vhosts='vim /etc/hosts'
 else
     alias v='vi'
+    alias vhosts='vi /etc/hosts'
     echo "Vim not installed!"
 fi
 
@@ -133,6 +135,9 @@ alias pj="prettyjson2"
 # The opposite of yes
 alias no='yes n'
 
+# Shutdown the system
+alias die='sudo shutdown -P now'
+
 # Hash things
 alias md5='md5sum'
 alias sha1='sha1sum'
@@ -165,5 +170,6 @@ alias lookBusy=' while true; do head -c200 /dev/urandom | od -An -w50 -x | grep 
 alias cafe=' cat /dev/urandom | hexdump | grep -E "ca ?fe"'
 
 # eg. fake-latency 97ms
+# See also bin/nhack
 alias fake-latency='tc qdisc add dev eth0 root netem delay '
 alias remove-latency='tc qdisc del dev eth0 root netem'

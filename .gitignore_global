@@ -4,9 +4,10 @@
 *.old
 *_gitignore*
 ignore/*
-*/ignore/*
+*ignore/*
 *_ignore.*
 *.ignore
+*.ignore.*
 
 *~
 .DS_Store

@@ -38,6 +38,13 @@ $ nhack latency start 100ms
 $ nhack latency stop
     Remove any latency that has been applied to eth0"
 
+bandwithhelp="
+$ nhack bandwith start 1kbps
+    Limit the bandwith to 1kbps on eth0
+$ nback bandwith stop
+    Disable any bandwith limits on eth0
+"
+
 help="
 $info
 
@@ -46,6 +53,7 @@ $ nhack help
 $ nhack licence
     Print the licence info
 $latencyhelp
+$bandwithhelp
 "
 
 case "$mode$command" in
@@ -68,9 +76,28 @@ case "$mode$command" in
         fi
         ;;
 
+    bandwithstart)
+        echo "Start bandwith limit of ${@:3} on $interface"
+        tc qdisc add dev $interface handle 1: root htb default 11
+        tc class add dev $interface parent 1: classid 1:1 htb rate ${@:3}
+        tc class add dev $interface parent 1:1 classid 1:11 htb rate ${@:3}
+        ;;
+    bandwithstop)
+        echo "Stop bandwith limit on $interface"
+        tc qdisc del dev $interface root htb
+        ;;
+
+    stop)
+        echo "Clear all rules"
+        tc qdisc del dev $interface root
+        ;;
+
     # Help commands
     latencyhelp)
         echo "$latencyhelp"
+        ;;
+    bandwithhelp)
+        echo "$bandwithhelp"
         ;;
     help)
         echo "$help"
